@@ -2,91 +2,64 @@ package sample.data.jpa.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import sample.data.jpa.domain.User;
 import sample.data.jpa.service.UserDao;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping("/users")
 public class UserController {
   // Private fields
-
   @Autowired
   private UserDao userDao;
 
   /**
-   * GET /create  --> Create a new user and save it in the database.
+   * POST /create  --> Create a new user and save it in the database.
    */
-  @RequestMapping("/create")
-  @ResponseBody
-  public String create(String email, String name) {
-    String userId = "";
-    try {
-      User user = new User(email, name);
-      userDao.save(user);
-      userId = String.valueOf(user.getId());
-    }
-    catch (Exception ex) {
-      return "Error creating the user: " + ex.toString();
-    }
-    return "User succesfully created with id = " + userId;
+  @PostMapping
+  public User create(@RequestBody User user) {
+    return userDao.save(user);
   }
   
   /**
-   * GET /delete  --> Delete the user having the passed id.
+   * DELETE /delete  --> Delete the user having the passed id.
    */
-  @RequestMapping("/delete")
-  @ResponseBody
-  public String delete(long id) {
-    try {
-      User user = new User(id);
-      userDao.delete(user);
-    }
-    catch (Exception ex) {
-      return "Error deleting the user:" + ex.toString();
-    }
-    return "User succesfully deleted!";
+  @DeleteMapping("{id}")
+  public void delete(@PathVariable long id) {
+    userDao.deleteById(id);
+  }
+
+  /**
+   * GET /*  --> Return the list of users.
+   */
+  @GetMapping
+  public List<User> getUsers() {
+    return userDao.findAll();
   }
   
   /**
-   * GET /get-by-email  --> Return the id for the user having the passed
+   * GET /get-by-email  --> Return the id for user having the passed email.
    * email.
    */
-  @RequestMapping("/get-by-email/{email}")
-  @ResponseBody
-  public String getByEmail(@PathVariable("email") String email) {
-    String userId = "";
-    try {
-      User user = userDao.findByEmail(email);
-      userId = String.valueOf(user.getId());
-    }
-    catch (Exception ex) {
-      return "User not found";
-    }
-    return "The user id is: " + userId;
+  @GetMapping(path = "{email}")
+  public Long getByEmail(@PathVariable(name = "email") String email) {
+    return userDao.findByEmail(email).getId();
   }
   
   /**
-   * GET /update  --> Update the email and the name for the user in the 
+   * PUT /update  --> Update the email and the name for the user in the
    * database having the passed id.
    */
-  @RequestMapping("/update")
-  @ResponseBody
-  public String updateUser(long id, String email, String name) {
-    try {
-      User user = userDao.findById(id).get();
-      user.setEmail(email);
-      user.setName(name);
-      userDao.save(user);
-    }
-    catch (Exception ex) {
-      return "Error updating the user: " + ex.toString();
-    }
-    return "User succesfully updated!";
+  @PutMapping(path = "{id}")
+  public User updateUser(@PathVariable long id, @RequestBody User user) {
+    User user1 = userDao.findById(id).get();
+    user1.setEmail(user.getEmail());
+    user1.setName(user.getName());
+
+    return userDao.save(user1);
   }
 
-
-  
 }
