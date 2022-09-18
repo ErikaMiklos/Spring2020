@@ -17,11 +17,10 @@
 package sample.simple;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import sample.simple.domain.client.IRun;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import sample.simple.service.HelloWorldService;
 
 @SpringBootApplication
 public class SampleSimpleApplication implements CommandLineRunner {
@@ -31,10 +30,10 @@ public class SampleSimpleApplication implements CommandLineRunner {
 	// command line args ('--name=whatever') or application properties
 
 	@Autowired
-	private HelloWorldService helloWorldService;
+	private IRun irun;
 
 	public void run(String... args) {
-		System.out.println(this.helloWorldService.getHelloMessage());
+		this.irun.run();
 	}
 
 	public static void main(String[] args) throws Exception {

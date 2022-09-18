@@ -11,6 +11,10 @@ import sample.data.jpa.service.UserDao;
 
 @Controller
 public class UserController {
+  // Private fields
+
+  @Autowired
+  private UserDao userDao;
 
   /**
    * GET /create  --> Create a new user and save it in the database.
@@ -83,9 +87,6 @@ public class UserController {
     return "User succesfully updated!";
   }
 
-  // Private fields
 
-  @Autowired
-  private UserDao userDao;
   
 }
