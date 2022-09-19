@@ -5,6 +5,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import sample.data.jpa.domain.User;
 
+import java.util.Optional;
+
 // Imports ...
 
 @Transactional
@@ -15,6 +17,6 @@ public interface UserDao extends JpaRepository<User, Long> {
    * Note that this method is not implemented and its working code will be
    * automagically generated from its signature by Spring Data JPA.
    */
-  public User findByEmail(String email);
+  public Optional<User> findByEmail(String email);
 
 }

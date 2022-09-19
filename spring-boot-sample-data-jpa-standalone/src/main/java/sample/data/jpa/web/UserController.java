@@ -1,10 +1,10 @@
 package sample.data.jpa.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import sample.data.jpa.domain.User;
+import sample.data.jpa.exception.ResourceNotFoundException;
 import sample.data.jpa.service.UserDao;
 
 import java.util.List;
@@ -29,7 +29,10 @@ public class UserController {
    */
   @DeleteMapping("{id}")
   public void delete(@PathVariable long id) {
-    userDao.deleteById(id);
+    User user1 = userDao.findById(id).orElseThrow(
+            () -> new ResourceNotFoundException("User", "id", id)
+    );
+    userDao.delete(user1);
   }
 
   /**
@@ -46,7 +49,10 @@ public class UserController {
    */
   @GetMapping(path = "{email}")
   public Long getByEmail(@PathVariable(name = "email") String email) {
-    return userDao.findByEmail(email).getId();
+    User user1 = userDao.findByEmail(email).orElseThrow(
+            () -> new ResourceNotFoundException("User", "email", email)
+    );
+    return user1.getId();
   }
   
   /**
@@ -55,7 +61,9 @@ public class UserController {
    */
   @PutMapping(path = "{id}")
   public User updateUser(@PathVariable long id, @RequestBody User user) {
-    User user1 = userDao.findById(id).get();
+    User user1 = userDao.findById(id).orElseThrow(
+            () -> new ResourceNotFoundException("User", "id", id)
+    );
     user1.setEmail(user.getEmail());
     user1.setName(user.getName());
 
