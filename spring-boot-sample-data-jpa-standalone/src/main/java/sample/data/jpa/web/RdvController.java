@@ -1,6 +1,5 @@
 package sample.data.jpa.web;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sample.data.jpa.domain.Etudiant;
@@ -24,24 +23,55 @@ public class RdvController {
     private ProfDao profDao;
 
     /**
-     * POST /create  --> Create a new rdv and save it in the database.
+     * POST /create  --> Create a new rdv and save it in the database
+     * having the passed id of an existent student.
      */
-    @PostMapping
-    public RDV create(Long profId, Long etudiantId, String heureDebut, String heureFin) {
-        Prof prof = profDao.findById(profId).orElseThrow(
-                () -> new ResourceNotFoundException("Prof", "id", profId)
-        );
+    @PostMapping("/{etudiantId}")
+    public RDV create(@PathVariable Long etudiantId, Long profId, String heureRdv) {
+
         Etudiant etudiant = etudiantDao.findById(etudiantId).orElseThrow(
                 () -> new ResourceNotFoundException("Etudiant", "id", etudiantId)
         );
+        Prof prof = profDao.findById(profId).orElseThrow(
+                () -> new ResourceNotFoundException("Prof", "id", profId)
+        );
+
         RDV rdv = new RDV();
-        rdv.setHeureDebut(heureDebut);
-        rdv.setHeureFin(heureFin);
         rdv.setEtudiant(etudiant);
         rdv.setProf(prof);
-        rdv.setReserve(true);
+        rdv.setHeureRdv(heureRdv);
         return rdvDao.save(rdv);
     }
 
+    /**
+     * GET /*  --> Return the list of rdvs.
+     */
+    @GetMapping
+    public List<RDV> getRdvs() {
+        return rdvDao.findAll();
+    }
 
+    /**
+     * DELETE /delete  --> Delete the rdv having the passed id.
+     */
+    @DeleteMapping("/{rdvId}")
+    public void delete(@PathVariable long rdvId) {
+        RDV rdv = rdvDao.findById(rdvId).orElseThrow(
+                () -> new ResourceNotFoundException("RDV", "id", rdvId)
+        );
+        rdvDao.delete(rdv);
+    }
+
+    /**
+     * PUT /update  --> Update timetable of the rdv in the
+     * database having the passed id.
+     */
+    @PutMapping(path = "/{rdvId}")
+    public RDV updateRDV(@PathVariable long rdvId, String heureRdv) {
+        RDV rdv = rdvDao.findById(rdvId).orElseThrow(
+                () -> new ResourceNotFoundException("Rdv", "id", rdvId)
+        );
+        rdv.setHeureRdv(heureRdv);
+        return rdvDao.save(rdv);
+    }
 }

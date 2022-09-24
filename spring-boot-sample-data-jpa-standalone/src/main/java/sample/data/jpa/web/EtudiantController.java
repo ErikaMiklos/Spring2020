@@ -3,9 +3,11 @@ package sample.data.jpa.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sample.data.jpa.domain.Etudiant;
+import sample.data.jpa.domain.RDV;
 import sample.data.jpa.exception.ResourceNotFoundException;
 import sample.data.jpa.service.EtudiantDao;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -27,10 +29,10 @@ public class EtudiantController {
      */
     @DeleteMapping("/{id}")
     public void delete(@PathVariable long id) {
-        Etudiant etudiant1 = etudiantDao.findById(id).orElseThrow(
+        Etudiant etudiant = etudiantDao.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Etudiant", "id", id)
         );
-        etudiantDao.delete(etudiant1);
+        etudiantDao.delete(etudiant);
     }
 
     /**
@@ -42,14 +44,11 @@ public class EtudiantController {
     }
 
     /**
-     * GET /get-by-faculte  --> Return the id for user having the passed faculte.
+     * GET /get-etudiants-by-faculte  --> Return the list of etudiants having its faculte passed.
      */
     @GetMapping(path = "/{faculte}")
-    public Long getByFaculte(@PathVariable(name = "faculte") String faculte) {
-        Etudiant etudiant1 = etudiantDao.findByFaculte(faculte).orElseThrow(
-                () -> new ResourceNotFoundException("Etudiant", "faculte", faculte)
-        );
-        return etudiant1.getId();
+    public List<Etudiant> getByFaculte(@PathVariable(name = "faculte") String faculte) {
+        return etudiantDao.findAllByFaculte(faculte);
     }
 
     /**

@@ -42,15 +42,16 @@ public class ProfController {
     }
 
     /**
-     * GET /get-by-matiere  --> Return the id for user having the passed matiere.
+     * GET /get-by-matiere  --> Return the id for prof having the passed matiere.
      */
     @GetMapping(path = "/{matiere}")
     public Long getByMatiere(@PathVariable(name = "matiere") String matiere) {
-        Prof prof1 = profDao.findByMatiere(matiere).orElseThrow(
+        Prof prof = profDao.findByMatiere(matiere).orElseThrow(
                 () -> new ResourceNotFoundException("Prof", "matiere", matiere)
         );
-        return prof1.getId();
+        return prof.getId();
     }
+
 
     /**
      * PUT /update  --> Update the name and the firstname for the prof in the

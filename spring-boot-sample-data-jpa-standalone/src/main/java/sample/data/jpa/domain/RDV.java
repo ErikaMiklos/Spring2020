@@ -13,9 +13,8 @@ import javax.persistence.*;
 public class RDV {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private boolean reserve;
-    private String heureDebut;
-    private String heureFin;
+
+    private String heureRdv;
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Etudiant etudiant;

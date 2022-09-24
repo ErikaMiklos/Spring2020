@@ -3,12 +3,14 @@ package sample.data.jpa.service;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import sample.data.jpa.domain.Etudiant;
+import sample.data.jpa.domain.RDV;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
+import java.util.Collection;
+import java.util.List;
 
 @Service
 @Transactional
 public interface EtudiantDao extends JpaRepository<Etudiant, Long> {
-    Optional<Etudiant> findByFaculte(String faculte);
+    List<Etudiant> findAllByFaculte(String faculte);
 }

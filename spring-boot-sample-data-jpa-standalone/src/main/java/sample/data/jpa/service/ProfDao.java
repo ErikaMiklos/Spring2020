@@ -11,4 +11,5 @@ import java.util.Optional;
 @Transactional
 public interface ProfDao extends JpaRepository<Prof,Long> {
     Optional<Prof> findByMatiere(String matiere);
+
 }
