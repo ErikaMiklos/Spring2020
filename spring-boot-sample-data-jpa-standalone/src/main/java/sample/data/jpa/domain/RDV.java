@@ -13,13 +13,17 @@ import javax.persistence.*;
 public class RDV {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @Column(length = 20, nullable = false)
     private String heureRdv;
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Etudiant etudiant;
+
+    private String etudiantNom;
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Prof prof;
+
+    private String profNom;
 
 }

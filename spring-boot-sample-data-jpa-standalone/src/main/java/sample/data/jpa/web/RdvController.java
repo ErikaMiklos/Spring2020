@@ -38,7 +38,9 @@ public class RdvController {
 
         RDV rdv = new RDV();
         rdv.setEtudiant(etudiant);
+        rdv.setEtudiantNom(etudiant.getNom());
         rdv.setProf(prof);
+        rdv.setProfNom(prof.getNom());
         rdv.setHeureRdv(heureRdv);
         return rdvDao.save(rdv);
     }

@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,7 +14,7 @@ import java.util.List;
 public class Prof extends Personne{
     @Column(length = 45, nullable = false)
     private String matiere;
-    @OneToMany(mappedBy = "prof")
+    @OneToMany(mappedBy = "prof", cascade = CascadeType.ALL)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<RDV> rdvs;
 }
