@@ -78,7 +78,7 @@ public class RdvController {
     /**
      *  GET /get-all-by-prof  --> Return the list of rdvs of an existing prof.
      */
-    @GetMapping(path = "/{profId}")
+    @GetMapping(path = "/prof/{profId}")
     public List<RDV> getAllByProf(@PathVariable(name = "profId") Long id) {
         Prof prof = profDao.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Prof", "profId", id)
@@ -86,14 +86,14 @@ public class RdvController {
         return prof.getRdvs();
     }
 
-/*    *//**
+    /**
      *  GET /get-all-by-student  --> Return the list of rdvs of an existing student.
-     *//*
-    @GetMapping(path = "/{etudId}")
-    public List<RDV> getAllByEtudiant(@PathVariable(name = "etudId") Long id) {
+     */
+    @GetMapping(path = "/etudiant/{etudiantId}")
+    public List<RDV> getAllByEtudiant(@PathVariable(name = "etudiantId") Long id) {
         Etudiant etudiant = etudiantDao.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Etudiant", "etudId", id)
+                () -> new ResourceNotFoundException("Etudiant", "etudiantId", id)
         );
         return etudiant.getRdvs();
-    }*/
+    }
 }
