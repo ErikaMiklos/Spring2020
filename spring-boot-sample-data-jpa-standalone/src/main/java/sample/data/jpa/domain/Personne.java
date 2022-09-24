@@ -13,7 +13,7 @@ import javax.persistence.*;
 public abstract class Personne {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(length = 45)
+    @Column(length = 45, nullable = false)
     private String nom;
     @Column(length = 45)
     private String prenom;
