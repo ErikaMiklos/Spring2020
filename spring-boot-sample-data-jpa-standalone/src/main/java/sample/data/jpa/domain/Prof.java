@@ -12,7 +12,6 @@ import java.util.List;
 @Data @NoArgsConstructor
 @DiscriminatorValue("PROF")
 public class Prof extends Personne{
-    @Column(length = 45, nullable = false)
     private String matiere;
     @OneToMany(mappedBy = "prof", cascade = CascadeType.ALL)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
