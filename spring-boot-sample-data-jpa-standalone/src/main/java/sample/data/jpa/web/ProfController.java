@@ -7,7 +7,6 @@ import sample.data.jpa.exception.ResourceNotFoundException;
 import sample.data.jpa.service.ProfDao;
 
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 @RequestMapping("/profs")

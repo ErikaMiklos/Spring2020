@@ -3,12 +3,10 @@ package sample.data.jpa.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sample.data.jpa.domain.Etudiant;
-import sample.data.jpa.domain.RDV;
 import sample.data.jpa.exception.ResourceNotFoundException;
 import sample.data.jpa.service.EtudiantDao;
 
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 @RequestMapping("/etudiants")

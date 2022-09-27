@@ -11,7 +11,6 @@ import sample.data.jpa.service.ProfDao;
 import sample.data.jpa.service.RdvDao;
 
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 @RequestMapping("/rdvs")
