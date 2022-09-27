@@ -12,5 +12,5 @@ import java.util.List;
 @Service
 @Transactional
 public interface EtudiantDao extends JpaRepository<Etudiant, Long> {
-    List<Etudiant> findAllByFaculte(String faculte);
+    Collection<Etudiant> findAllByFaculte(String faculte);
 }

@@ -15,5 +15,5 @@ public class Etudiant extends Personne{
     private String faculte;
     @OneToMany(mappedBy = "etudiant", cascade = CascadeType.ALL)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private List<RDV> rdvs;
+    private Collection<RDV> rdvs;
 }

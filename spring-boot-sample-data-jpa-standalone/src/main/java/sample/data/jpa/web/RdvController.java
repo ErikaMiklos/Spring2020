@@ -10,6 +10,7 @@ import sample.data.jpa.service.EtudiantDao;
 import sample.data.jpa.service.ProfDao;
 import sample.data.jpa.service.RdvDao;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -51,7 +52,7 @@ public class RdvController {
      * GET /*  --> Return the list of rdvs.
      */
     @GetMapping
-    public List<RDV> getRdvs() {
+    public Collection<RDV> getRdvs() {
         return rdvDao.findAll();
     }
 
@@ -84,7 +85,7 @@ public class RdvController {
      *  GET /get-all-by-prof  --> Return the list of rdvs of an existing prof.
      */
     @GetMapping(path = "/prof/{profId}")
-    public List<RDV> getAllByProf(@PathVariable(name = "profId") Long id) {
+    public Collection<RDV> getAllByProf(@PathVariable(name = "profId") Long id) {
         Prof prof = profDao.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Prof", "profId", id)
         );
@@ -95,7 +96,7 @@ public class RdvController {
      *  GET /get-all-by-student  --> Return the list of rdvs of an existing student.
      */
     @GetMapping(path = "/etudiant/{etudiantId}")
-    public List<RDV> getAllByEtudiant(@PathVariable(name = "etudiantId") Long id) {
+    public Collection<RDV> getAllByEtudiant(@PathVariable(name = "etudiantId") Long id) {
         Etudiant etudiant = etudiantDao.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Etudiant", "etudiantId", id)
         );

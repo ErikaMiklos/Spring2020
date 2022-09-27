@@ -6,6 +6,7 @@ import sample.data.jpa.domain.Prof;
 import sample.data.jpa.exception.ResourceNotFoundException;
 import sample.data.jpa.service.ProfDao;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -37,7 +38,7 @@ public class ProfController {
      * GET /*  --> Return the list of profs.
      */
     @GetMapping
-    public List<Prof> getProfs() {
+    public Collection<Prof> getProfs() {
         return profDao.findAll();
     }
 

@@ -39,7 +39,7 @@ public class EtudiantController {
      * GET /*  --> Return the list of etudiants.
      */
     @GetMapping
-    public List<Etudiant> getEtudiants() {
+    public Collection<Etudiant> getEtudiants() {
         return etudiantDao.findAll();
     }
 
@@ -47,7 +47,7 @@ public class EtudiantController {
      * GET /get-etudiants-by-faculte  --> Return the list of etudiants having its faculte passed.
      */
     @GetMapping(path = "/{faculte}")
-    public List<Etudiant> getByFaculte(@PathVariable(name = "faculte") String faculte) {
+    public Collection<Etudiant> getByFaculte(@PathVariable(name = "faculte") String faculte) {
         return etudiantDao.findAllByFaculte(faculte);
     }
 
@@ -56,7 +56,8 @@ public class EtudiantController {
      * database having the passed id.
      */
     @PutMapping(path = "/{id}")
-    public Etudiant updateEtudiant(@PathVariable(name = "id") Long id, @RequestBody Etudiant etudiant) {
+    public Etudiant updateEtudiant(@PathVariable(name = "id") Long id,
+                                   @RequestBody Etudiant etudiant) {
         Etudiant etudiant1 = etudiantDao.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Etudiant", "id", id)
         );

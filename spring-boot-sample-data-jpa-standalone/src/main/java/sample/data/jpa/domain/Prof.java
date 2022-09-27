@@ -15,5 +15,5 @@ public class Prof extends Personne{
     private String matiere;
     @OneToMany(mappedBy = "prof", cascade = CascadeType.ALL)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private List<RDV> rdvs;
+    private Collection<RDV> rdvs;
 }
