@@ -28,7 +28,7 @@ public class EtudiantController {
      * DELETE /delete  --> Delete the etudiant having the passed id.
      */
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id) {
+    public void delete(@PathVariable(name = "id") Long id) {
         Etudiant etudiant = etudiantDao.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Etudiant", "id", id)
         );
@@ -56,7 +56,7 @@ public class EtudiantController {
      * database having the passed id.
      */
     @PutMapping(path = "/{id}")
-    public Etudiant updateEtudiant(@PathVariable long id, @RequestBody Etudiant etudiant) {
+    public Etudiant updateEtudiant(@PathVariable(name = "id") Long id, @RequestBody Etudiant etudiant) {
         Etudiant etudiant1 = etudiantDao.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Etudiant", "id", id)
         );

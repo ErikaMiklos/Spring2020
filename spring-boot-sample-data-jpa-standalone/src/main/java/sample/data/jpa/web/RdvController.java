@@ -27,7 +27,9 @@ public class RdvController {
      * having the passed id of an existent student.
      */
     @PostMapping("/{etudiantId}")
-    public RDV create(@PathVariable Long etudiantId, Long profId, String heureRdv) {
+    public RDV create(@PathVariable(name = "etudiantId") Long etudiantId,
+                      @RequestParam(name = "profId") Long profId,
+                      @RequestParam(name = "heureRdv") String heureRdv) {
 
         Etudiant etudiant = etudiantDao.findById(etudiantId).orElseThrow(
                 () -> new ResourceNotFoundException("Etudiant", "id", etudiantId)
@@ -57,7 +59,7 @@ public class RdvController {
      * DELETE /delete  --> Delete the rdv having the passed id.
      */
     @DeleteMapping("/{rdvId}")
-    public void delete(@PathVariable long rdvId) {
+    public void delete(@PathVariable(name = "rdvId") Long rdvId) {
         RDV rdv = rdvDao.findById(rdvId).orElseThrow(
                 () -> new ResourceNotFoundException("RDV", "id", rdvId)
         );
@@ -69,7 +71,8 @@ public class RdvController {
      * database having the passed id.
      */
     @PutMapping(path = "/{rdvId}")
-    public RDV updateRDV(@PathVariable long rdvId, String heureRdv) {
+    public RDV updateRDV(@PathVariable(name = "rdvId") Long rdvId,
+                         @RequestParam(name = "heureRdv") String heureRdv) {
         RDV rdv = rdvDao.findById(rdvId).orElseThrow(
                 () -> new ResourceNotFoundException("Rdv", "id", rdvId)
         );

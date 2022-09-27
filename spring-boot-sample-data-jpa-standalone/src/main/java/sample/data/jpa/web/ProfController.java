@@ -26,7 +26,7 @@ public class ProfController {
      * DELETE /delete  --> Delete the prof having the passed id.
      */
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id) {
+    public void delete(@PathVariable(name = "id") Long id) {
         Prof prof1 = profDao.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Prof", "id", id)
         );
@@ -58,7 +58,7 @@ public class ProfController {
      * database having the passed id.
      */
     @PutMapping(path = "/{id}")
-    public Prof updateProf(@PathVariable long id, @RequestBody Prof prof) {
+    public Prof updateProf(@PathVariable(name = "id") Long id, @RequestBody Prof prof) {
         Prof prof1 = profDao.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Prof", "id", id)
         );
