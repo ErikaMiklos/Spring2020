@@ -1,6 +1,5 @@
 package sample.data.jpa.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sample.data.jpa.domain.Etudiant;
 import sample.data.jpa.domain.Prof;
@@ -15,12 +14,16 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/rdvs")
 public class RdvController {
-    @Autowired
-    private RdvDao rdvDao;
-    @Autowired
-    private EtudiantDao etudiantDao;
-    @Autowired
-    private ProfDao profDao;
+
+    private final RdvDao rdvDao;
+    private final EtudiantDao etudiantDao;
+    private final ProfDao profDao;
+
+    public RdvController(RdvDao rdvDao, EtudiantDao etudiantDao, ProfDao profDao) {
+        this.rdvDao = rdvDao;
+        this.etudiantDao = etudiantDao;
+        this.profDao = profDao;
+    }
 
     /**
      * POST /create  --> Create a new rdv and save it in the database
