@@ -1,6 +1,5 @@
 package sample.data.jpa.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import sample.data.jpa.domain.Prof;
 import sample.data.jpa.exception.ResourceNotFoundException;
@@ -11,8 +10,10 @@ import java.util.Collection;
 @RestController
 @RequestMapping("/profs")
 public class ProfController {
-    @Autowired
-    private ProfDao profDao;
+    private final ProfDao profDao;
+    public ProfController(ProfDao profDao) {
+        this.profDao = profDao;
+    }
 
     /**
      * POST /create  --> Create a new prof and save it in the database.
@@ -26,7 +27,7 @@ public class ProfController {
      * DELETE /delete  --> Delete the prof having the passed id.
      */
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable(name = "id") Long id) {
+    public void delete(@PathVariable Long id) {
         Prof prof1 = profDao.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Prof", "id", id)
         );
@@ -45,7 +46,7 @@ public class ProfController {
      * GET /get-by-matiere  --> Return the id for prof having the passed matiere.
      */
     @GetMapping(path = "/{matiere}")
-    public Long getByMatiere(@PathVariable(name = "matiere") String matiere) {
+    public Long getByMatiere(@PathVariable String matiere) {
         Prof prof = profDao.findByMatiere(matiere).orElseThrow(
                 () -> new ResourceNotFoundException("Prof", "matiere", matiere)
         );
@@ -58,7 +59,7 @@ public class ProfController {
      * database having the passed id.
      */
     @PutMapping(path = "/{id}")
-    public Prof updateProf(@PathVariable(name = "id") Long id, @RequestBody Prof prof) {
+    public Prof updateProf(@PathVariable Long id, @RequestBody Prof prof) {
         Prof prof1 = profDao.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Prof", "id", id)
         );
