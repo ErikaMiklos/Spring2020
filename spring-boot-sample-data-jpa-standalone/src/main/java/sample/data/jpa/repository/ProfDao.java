@@ -1,4 +1,4 @@
-package sample.data.jpa.service;
+package sample.data.jpa.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;

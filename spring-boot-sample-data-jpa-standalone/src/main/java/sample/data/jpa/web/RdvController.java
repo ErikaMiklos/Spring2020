@@ -6,9 +6,9 @@ import sample.data.jpa.domain.Prof;
 import sample.data.jpa.domain.RDV;
 import sample.data.jpa.domain.StatusRdv;
 import sample.data.jpa.exception.ResourceNotFoundException;
-import sample.data.jpa.service.EtudiantDao;
-import sample.data.jpa.service.ProfDao;
-import sample.data.jpa.service.RdvDao;
+import sample.data.jpa.repository.EtudiantDao;
+import sample.data.jpa.repository.ProfDao;
+import sample.data.jpa.repository.RdvDao;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

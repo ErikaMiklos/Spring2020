@@ -3,7 +3,7 @@ package sample.data.jpa.web;
 import org.springframework.web.bind.annotation.*;
 import sample.data.jpa.domain.Prof;
 import sample.data.jpa.exception.ResourceNotFoundException;
-import sample.data.jpa.service.ProfDao;
+import sample.data.jpa.repository.ProfDao;
 
 import java.util.Collection;
 
