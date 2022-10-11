@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -13,8 +14,12 @@ import javax.persistence.*;
 public class RDV {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Temporal(TemporalType.DATE)
+    private Date dateRdv;
     @Column(length = 20)
     private String heureRdv;
+    @Enumerated(EnumType.STRING)
+    private StatusRdv statusRdv;
     @ManyToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Etudiant etudiant;
