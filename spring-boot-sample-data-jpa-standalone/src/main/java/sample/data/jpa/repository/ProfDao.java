@@ -1,15 +1,13 @@
 package sample.data.jpa.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 import sample.data.jpa.domain.Prof;
 
-import javax.transaction.Transactional;
-import java.util.Optional;
+import java.util.Collection;
 
-@Service
-@Transactional
+@Repository
 public interface ProfDao extends JpaRepository<Prof,Long> {
-    Optional<Prof> findByMatiere(String matiere);
+    Collection<Prof> findAllByMatiere(String matiere);
 
 }

@@ -2,17 +2,17 @@ package sample.data.jpa.web;
 
 import org.springframework.web.bind.annotation.*;
 import sample.data.jpa.domain.Prof;
-import sample.data.jpa.exception.ResourceNotFoundException;
-import sample.data.jpa.repository.ProfDao;
+import sample.data.jpa.service.IProfService;
 
 import java.util.Collection;
 
 @RestController
 @RequestMapping("/profs")
 public class ProfController {
-    private final ProfDao profDao;
-    public ProfController(ProfDao profDao) {
-        this.profDao = profDao;
+    private final IProfService profService;
+
+    public ProfController(IProfService profService) {
+        this.profService = profService;
     }
 
     /**
@@ -20,7 +20,7 @@ public class ProfController {
      */
     @PostMapping
     public Prof create(@RequestBody Prof prof) {
-        return profDao.save(prof);
+        return profService.saveProf(prof);
     }
 
     /**
@@ -28,10 +28,7 @@ public class ProfController {
      */
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
-        Prof prof1 = profDao.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Prof", "id", id)
-        );
-        profDao.delete(prof1);
+        profService.deleteProf(id);
     }
 
     /**
@@ -39,18 +36,15 @@ public class ProfController {
      */
     @GetMapping
     public Collection<Prof> getProfs() {
-        return profDao.findAll();
+        return profService.getAllProfs();
     }
 
     /**
-     * GET /get-by-matiere  --> Return the id for prof having the passed matiere.
+     * GET /get-by-matiere  --> Return list of profs having the passed matiere.
      */
     @GetMapping(path = "/{matiere}")
-    public Long getByMatiere(@PathVariable String matiere) {
-        Prof prof = profDao.findByMatiere(matiere).orElseThrow(
-                () -> new ResourceNotFoundException("Prof", "matiere", matiere)
-        );
-        return prof.getId();
+    public Collection<Prof> getByMatiere(@PathVariable String matiere) {
+        return profService.getAllProfsByMatiere(matiere);
     }
 
 
@@ -60,12 +54,6 @@ public class ProfController {
      */
     @PutMapping(path = "/{id}")
     public Prof updateProf(@PathVariable Long id, @RequestBody Prof prof) {
-        Prof prof1 = profDao.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("Prof", "id", id)
-        );
-        prof1.setNom(prof.getNom());
-        prof1.setPrenom(prof.getPrenom());
-
-        return profDao.save(prof1);
+        return profService.updateProf(id, prof);
     }
 }
