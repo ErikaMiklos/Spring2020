@@ -8,7 +8,7 @@ import sample.data.jpa.repository.ProfDao;
 import java.util.Collection;
 @Service
 public class ProfServiceImpl implements IProfService{
-    private ProfDao profDao;
+    private final ProfDao profDao;
 
     public ProfServiceImpl(ProfDao profDao) {
         this.profDao = profDao;

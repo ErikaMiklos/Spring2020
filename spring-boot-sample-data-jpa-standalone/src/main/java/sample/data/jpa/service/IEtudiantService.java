@@ -1,9 +1,7 @@
 package sample.data.jpa.service;
 
-import org.springframework.stereotype.Service;
 import sample.data.jpa.domain.Etudiant;
 
-import javax.transaction.Transactional;
 import java.util.Collection;
 
 public interface IEtudiantService {
