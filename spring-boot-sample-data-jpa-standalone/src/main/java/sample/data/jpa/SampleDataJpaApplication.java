@@ -22,13 +22,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import sample.data.jpa.domain.Etudiant;
 import sample.data.jpa.domain.Prof;
-import sample.data.jpa.domain.RDV;
 import sample.data.jpa.domain.StatusRdv;
 import sample.data.jpa.service.EtudiantServiceImpl;
 import sample.data.jpa.service.ProfServiceImpl;
 import sample.data.jpa.service.RdvServiceImpl;
 
-import java.util.Date;
 import java.util.stream.Stream;
 
 @SpringBootApplication
