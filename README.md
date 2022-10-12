@@ -4,6 +4,7 @@ La réalisation du TP3 en version swagger c'est trouve dans le branch :
 ```
 spring-boot-sample-data-jpa-standalone
 ```
+Le diagram UML c'est trouve dans le default branch dans le fichier: doctolib.png
 ### Démarrage
 Lancez votre base de donnée type MySql
 Créez un nouvelle Database avec le nom:
