@@ -43,9 +43,17 @@ public class EtudiantController {
     /**
      * GET /get-etudiants-by-faculte  --> Return the list of etudiants having its faculte passed.
      */
-    @GetMapping(path = "/{faculte}")
+    @GetMapping(path = "/by/{faculte}")
     public Collection<Etudiant> getByFaculte(@PathVariable String faculte) {
         return etudiantService.getAllEtudiantsByFaculte(faculte);
+    }
+
+    /**
+     * GET /get-etudiant-by-id  --> Return the etudiant having its id passed.
+     */
+    @GetMapping(path = "/{id}")
+    public Etudiant getEtudiantById(@PathVariable Long id) {
+        return etudiantService.getEtudiantById(id);
     }
 
     /**

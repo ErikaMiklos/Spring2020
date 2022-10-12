@@ -18,8 +18,8 @@ public class RdvController {
     }
 
     /**
-     * POST /create  --> Create a new rdv and save it in the database
-     * having the passed id of an existent prof.
+     * POST /create  --> Create a new rdv with a status open(Ouvert)
+     * by an existing prof having the passed id and save it in the database.
      */
     @PostMapping("/{profId}")
     public RDV create(@PathVariable(name = "profId") Long profId,
@@ -46,8 +46,8 @@ public class RdvController {
     }
 
     /**
-     * PUT /update  --> Update the status of an existing rdv in the
-     * database having the passed etudiant and rdv id.
+     * PUT /update  --> Update the status (Reserver/Annuler) of a chosen rdv in the
+     * database by an existing etudiant and by the id of the related rdv.
      */
     @PutMapping(path = "/{etudiantId}/{rdvId}")
     public RDV updateRDV(@PathVariable Long etudiantId,
@@ -79,5 +79,13 @@ public class RdvController {
     @GetMapping(path = "/by/{status}")
     public Collection<RDV> getAllByStatus(@PathVariable(name = "status") StatusRdv statusRdv) {
         return rdvService.getAllRdvsByStatus(statusRdv);
+    }
+
+    /**
+     *  GET /get-by-id  --> Return the rdv found by its id.
+     */
+    @GetMapping(path = "/{id}")
+    public RDV getRdvById(@PathVariable(name = "id") Long id) {
+        return rdvService.getRdvById(id);
     }
 }

@@ -40,9 +40,17 @@ public class ProfController {
     }
 
     /**
+     * GET /*  --> Return the prof having the passed id.
+     */
+    @GetMapping("/{id}")
+    public Prof getProfById(@PathVariable long id) {
+        return profService.getProfById(id);
+    }
+
+    /**
      * GET /get-by-matiere  --> Return list of profs having the passed matiere.
      */
-    @GetMapping(path = "/{matiere}")
+    @GetMapping(path = "/by/{matiere}")
     public Collection<Prof> getByMatiere(@PathVariable String matiere) {
         return profService.getAllProfsByMatiere(matiere);
     }
