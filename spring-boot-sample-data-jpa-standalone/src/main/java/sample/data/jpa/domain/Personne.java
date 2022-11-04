@@ -8,8 +8,8 @@ import javax.persistence.*;
 
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "TYPE", length = 4)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@DiscriminatorColumn(name = "TYPE", length = 4)
 public abstract class Personne {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

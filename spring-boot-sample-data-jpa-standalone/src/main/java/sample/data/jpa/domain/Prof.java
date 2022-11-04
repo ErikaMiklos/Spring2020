@@ -11,7 +11,7 @@ import java.util.Collection;
 @Entity
 @Data @NoArgsConstructor
 @EqualsAndHashCode(callSuper=true)
-@DiscriminatorValue("PROF")
+//@DiscriminatorValue("PROF")
 public class Prof extends Personne{
     private String matiere;
     @OneToMany(mappedBy = "prof", cascade = CascadeType.ALL)
